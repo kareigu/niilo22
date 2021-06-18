@@ -23,7 +23,14 @@ var (
 var client = &http.Client{Timeout: 10 * time.Second}
 
 func getData(url string, target interface{}) error {
-	res, err := client.Get(url)
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return err
+	}
+
+	req.Header.Set("User-Agent", "Niilo22-Bot/1.0")
+
+	res, err := client.Do(req)
 	if err != nil {
 		return err
 	}
