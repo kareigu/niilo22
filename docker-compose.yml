@@ -1,0 +1,5 @@
+services:
+  bot:
+    image: mxr/niilo-bot
+    container_name: NiiloBot
+    restart: unless-stopped
