@@ -1,7 +1,9 @@
 package commands
 
 import (
+	"bytes"
 	"encoding/json"
+	"io/ioutil"
 	"net/http"
 	"time"
 
@@ -11,12 +13,14 @@ import (
 var (
 	List = []*discordgo.ApplicationCommand{
 		&niiloInfo,
+		&addNiiloInfo,
 	}
 
 	Handlers = map[string]func(
 		s *discordgo.Session,
 		i *discordgo.InteractionCreate){
-		niiloInfo.Name: niiloCmd,
+		niiloInfo.Name:    niiloCmd,
+		addNiiloInfo.Name: addNiiloCmd,
 	}
 )
 
@@ -40,6 +44,29 @@ func getData(url string, target interface{}) error {
 	defer res.Body.Close()
 
 	return json.NewDecoder(res.Body).Decode(&target)
+}
+
+func getDataRaw(url string) (string, error) {
+	req, err := http.NewRequest("GET", url, nil)
+	if err != nil {
+		return "", err
+	}
+
+	req.Header.Set("User-Agent", UserAgent)
+
+	res, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
+
+	defer res.Body.Close()
+
+	bodyBytes, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return "", err
+	}
+
+	return string(bodyBytes), nil
 }
 
 func postData(url string, target interface{}, body interface{}) error {
