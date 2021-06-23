@@ -1,5 +1,8 @@
 # Niilo22 Bot
 
+![Build](https://github.com/mxrr/niilo22/actions/workflows/build.yml/badge.svg)
+![Deploy](https://github.com/mxrr/niilo22/actions/workflows/deploy.yml/badge.svg)
+
 ## Used for posting and managing niilo22 quotes on Discord
 
 ---
