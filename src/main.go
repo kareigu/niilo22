@@ -39,9 +39,22 @@ func init() {
 	client.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		if h, ok := commands.Handlers[i.Data.Name]; ok {
 			h(s, i)
+			
+			var username, id string
+
+			if i.Member != nil {
+				username = i.Member.User.Username
+				id = i.Member.User.ID
+			} else if i.User != nil {
+				username = i.User.Username
+				id = i.User.ID
+			} else {
+				log.Printf("Error: no valid user info found")
+			}
+
 			log.Printf("%v#%v ran command %v",
-				i.Member.User.Username,
-				i.Member.User.ID,
+				username,
+				id,
 				i.Data.Name)
 		}
 	})
