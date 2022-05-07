@@ -52,7 +52,7 @@ func addNiiloCmd(s *discordgo.Session, i *discordgo.InteractionCreate) {
 
 	res := new(checkIDRes)
 
-	err := postData("https://misi.mxrr.dev/api/v1/tools/checkid", &res, &reqBody)
+	err := postData("https://misi.karei.dev/api/v1/tools/checkid", &res, &reqBody)
 	if err != nil {
 		log.Print(err)
 	}
@@ -60,7 +60,7 @@ func addNiiloCmd(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	if res.Permitted && res.Permlevel >= 3 {
 		key := os.Getenv("KEY")
 		new_quote := strings.ReplaceAll(i.Data.Options[0].StringValue(), " ", "%20")
-		add_url := fmt.Sprintf("https://misi.mxrr.dev/api/v1/niilo/add?secret=%s&text=%s",
+		add_url := fmt.Sprintf("https://misi.karei.dev/api/v1/niilo/add?secret=%s&text=%s",
 			key,
 			new_quote)
 
