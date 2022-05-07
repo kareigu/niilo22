@@ -33,7 +33,7 @@ func niiloCmd(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		search_param = i.Data.Options[0].StringValue()
 	}
 
-	url := fmt.Sprintf("https://misi.mxrr.dev/api/v1/niilo?search=%s", search_param)
+	url := fmt.Sprintf("https://misi.karei.dev/api/v1/niilo?search=%s", search_param)
 	text := ""
 	err := getData(url, &quote)
 	if err != nil {
