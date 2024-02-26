@@ -3,3 +3,5 @@ services:
     image: mxr/niilo-bot
     container_name: NiiloBot
     restart: unless-stopped
+    volumes:
+      - ./.env:/go/src/niilo_bot/.env
